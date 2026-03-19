@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fas fa-shield-alt"></i>Moneywise
+            </div>
+            <nav class="side-menu">
+                <a href="/user" class="active"><i class="fas fa-th-large"></i> Dashboard</a>
+                
+                <div class="menu-item has-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-trigger">
+                        <i class="fas fa-university"></i> Banking 
+                        <i class="fas fa-chevron-down dropdown-arrow"></i>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="/deposit"><i class="fas fa-plus-circle"></i> Deposit</a>
+                        <a href="/withdraw"><i class="fas fa-minus-circle"></i> Withdraw</a>
+                    </div>
+                </div>
+
+                <a href="deposit"><i class="fas fa-piggy-bank"></i> Saving</a>
+                <a href="/transfer"><i class="fas fa-history"></i> Transfer Funds</a>
+                <a href="#"><i class="fas fa-user-circle"></i> Profile</a>
+                <a href="#"><i class="fas fa-credit-card"></i> Cards</a>
+                <a href="#"><i class="fas fa-hand-holding-usd"></i> Loans</a>
+                <a href="/open-account"><i class="fas fa-wallet"></i> Accounts</a>
+                <a href="/logout" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <main class="main-stage">
+            <header class="top-nav">
+                <div class="search-bar">
+                    <h2>Moneywise</h2>
+                </div>
+                <div class="user-meta">
+                    <p>{{ user.first_name }} {{ user.last_name }}</p>
+                    <div class="avatar">{{ user.first_name[0] }}</div>
+                </div>
+            </header>
+
+            <h2 class="page-title">Dashboard</h2>
+
+            <section class="top-stats glass-panel">
+                <div class="stat-item">
+                    <h3>Available Balance</h3>
+                    <p>$ {{ user.accounts[0].balance if user.accounts else '0.00' }}</p>
+                </div>
+                <div class="stat-item">
+                    <p>Total Saving</p>
+                    <h3>$ 0.00</h3>
+                </div>
+                <div class="stat-item">
+                    <p>Balance Credited this Month</p>
+                    <h3 class="text-success">$ {{ total_credited }}</h3>
+                </div>
+                <div class="stat-item">
+                    <p>Balance Debited this Month</p>
+                    <h3 class="text-success">$ {{ "{:,.2f}".format(total_debited) }}</h3>
+                </div>
+            </section>
+
+            <section class="charts-grid">
+                <div class="chart-container glass-panel">
+                    <div class="chart-header">
+                        <h4>Transaction Graph</h4>
+                        <p>Overview of Daily transaction</p>
+                    </div>
+                    <canvas id="transactionChart"></canvas>
+                </div>
+                <div class="chart-container glass-panel">
+                    <div class="chart-header">
+                        <h4>Cash Flow Graph</h4>
+                        <p>Overview of Total Cash flow</p>
+                    </div>
+                    <canvas id="cashFlowChart"></canvas>
+                </div>
+            </section>
+
+            <section class="history-table glass-panel">
+                <div class="table-header">
+                    <div>
+                        <h4>Transaction History</h4>
+                        <p>Overview of recent transaction</p>
+                    </div>
+                    <button class="view-more">View More</button>
+                </div>
+                <div class="empty-state">
+                    No recent transactions found.
+                </div>
+            </section>
+        </main>
+    </div>
+    <script>
+        // Sample data for charts
+        const transactionData = {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Transactions',
+                data: [12, 19, 3, 5, 2, 3, 7],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        const cashFlowData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Cash Flow',
+                data: [5000, 4000, 3000, 2000, 1000, 1500],
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Configurations for charts
+        const transactionConfig = {
+            type: 'bar',
+            data: transactionData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const cashFlowConfig = {
+            type: 'line',
+            data: cashFlowData,
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Render charts
+        new Chart(document.getElementById('transactionChart'), transactionConfig);
+        new Chart(document.getElementById('cashFlowChart'), cashFlowConfig);
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const dropdownTrigger = document.querySelector('.dropdown-trigger');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        const arrow = document.querySelector('.dropdown-arrow');
+
+        if (dropdownTrigger) {
+            dropdownTrigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Toggle the 'show' class on the menu
+                dropdownContent.classList.toggle('show');
+                
+                // Rotate the arrow icon if it exists
+                if (arrow) {
+                    arrow.style.transform = dropdownContent.classList.contains('show') 
+                        ? 'rotate(180deg)' 
+                        : 'rotate(0deg)';
+                }
+            });
+        }
+
+        // Close dropdown if user clicks outside of it
+        window.addEventListener('click', function(e) {
+            if (!dropdownTrigger.contains(e.target)) {
+                dropdownContent.classList.remove('show');
+                if (arrow) arrow.style.transform = 'rotate(0deg)';
+            }
+        });
+    });
+    </script>
+    </body>
+</html>

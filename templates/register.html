@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Moneywise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}" />
+</head>
+<body>
+    <div class="lines-container">
+        <div class="falling-line" style="left: 10%; animation-duration: 7s;"></div>
+        <div class="falling-line" style="left: 20%; animation-duration: 9s; animation-delay: 2s;"></div>
+        <div class="falling-line" style="left: 35%; animation-duration: 11s;"></div>
+        <div class="falling-line" style="left: 50%; animation-duration: 6s; animation-delay: 1s;"></div>
+        <div class="falling-line" style="left: 65%; animation-duration: 13s;"></div>
+        <div class="falling-line" style="left: 80%; animation-duration: 8s; animation-delay: 3s;"></div>
+        <div class="falling-line" style="left: 95%; animation-duration: 10s;"></div>
+    </div>
+
+    <form id="regForm" method="POST" action="/register" enctype="multipart/form-data">
+        <div class="reg-container">
+            <div class="step" id="step1">
+                <div class="step-header">
+                    <h2>Registration Form</h2>
+                    <p class="step-title">Step 1/5 : Fill Personal Details</p>
+                </div>
+
+                <div class="grid-form">
+                    <div class="input-group">
+                        <input type="text" name="first_name" placeholder="First Name" required />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="last_name" placeholder="Last Name" required />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="father_name" placeholder="Father's Name" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="mother_name" placeholder="Mother's Name" />
+                    </div>
+                    <div class="input-group">
+                        <input type="date" name="birth_date" placeholder="Birth Date" />
+                    </div>
+                    <div class="input-group">
+                        <input type="tel" name="mobile" placeholder="Mobile Number" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="id_number" placeholder="Identity Number" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="tax_id" placeholder="Tax ID" />
+                    </div>
+                </div>
+
+                <div class="btn-row" style="justify-content: flex-end;">
+                    <button type="button" class="btn-next" onclick="nextStep(2)">NEXT</button>
+                </div>
+            </div>
+
+            <div class="step" id="step2" style="display: none;">
+                <div class="step-header">
+                    <h2>Registration Form</h2>
+                    <p class="step-title">Step 2/5 : Fill Contact Details</p>
+                </div>
+
+                <div class="grid-form">
+                    <div class="input-group">
+                        <input type="text" name="country" placeholder="Country" value="India" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="state" placeholder="State" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="city" placeholder="City" />
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="zip_code" placeholder="Zip Code" />
+                    </div>
+                    <div class="input-group" style="grid-column: span 2;">
+                        <textarea name="address" placeholder="Full Address" rows="3"></textarea>
+                    </div>
+                    <div class="input-group" style="grid-column: span 2;">
+                        <input type="email" name="email" placeholder="Email Address" />
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-back" onclick="nextStep(1)">BACK</button>
+                    <button type="button" class="btn-next" onclick="nextStep(3)">NEXT</button>
+                </div>
+            </div>
+
+            <div class="step" id="step3" style="display: none;">
+                <div class="step-header">
+                    <h2>Registration Form</h2>
+                    <p class="step-title">Step 3/5 : Verify Email Account</p>
+                </div>
+
+                <div class="form-note">OTP has been sent to your email. Please check your inbox.</div>
+
+                <div class="grid-form">
+                    <div class="input-group" style="grid-column: span 2;">
+                        <input type="text" name="otp" placeholder="Enter OTP" />
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-back" onclick="nextStep(2)">BACK</button>
+                    <button type="button" class="btn-next" onclick="nextStep(4)">NEXT</button>
+                </div>
+            </div>
+
+            <div class="step" id="step4" style="display: none;">
+                <div class="step-header">
+                    <h2>Registration Form</h2>
+                    <p class="step-title">Step 4/5 : Upload Documents</p>
+                </div>
+
+                <div class="grid-form" style="grid-template-columns: 1fr;">
+                    <div class="input-group">
+                        <label>Upload ID Card</label>
+                        <input type="file" name="id_card" class="file-input" accept="image/*,.pdf" />
+                    </div>
+                    <div class="input-group">
+                        <label>Upload Tax ID Proof</label>
+                        <input type="file" name="tax_id_proof" class="file-input" accept="image/*,.pdf" />
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-back" onclick="nextStep(3)">BACK</button>
+                    <button type="button" class="btn-next" onclick="nextStep(5)">NEXT</button>
+                </div>
+            </div>
+
+            <div class="step" id="step5" style="display: none;">
+                <div class="step-header">
+                    <h2>Registration Form</h2>
+                    <p class="step-title">Step 5/5 : Create Username And Password</p>
+                </div>
+
+                <div class="grid-form" style="grid-template-columns: 1fr;">
+                    <div class="input-group">
+                        <input type="text" name="username" placeholder="Username" required />
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" placeholder="Password" required />
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="confirm_password" placeholder="Confirm Password" required />
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button type="button" class="btn-back" onclick="nextStep(4)">BACK</button>
+                    <button type="submit" class="btn-next">SUBMIT</button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <script>
+    function nextStep(stepNumber) {
+        const current = document.querySelector('.step:not([style*="display: none"])');
+        if (current) {
+            const requiredFields = Array.from(current.querySelectorAll('[required]'));
+            const invalid = requiredFields.some(input => !input.value.trim());
+            if (invalid) {
+                alert('Complete all required fields in this step before continuing.');
+                return;
+            }
+        }
+
+        document.querySelectorAll('.step').forEach((s) => (s.style.display = 'none'));
+        const target = document.getElementById('step' + stepNumber);
+        if (target) target.style.display = 'block';
+    }
+
+    // Ensure submit actually occurs
+    document.getElementById('regForm').addEventListener('submit', function (event) {
+        const step5 = document.getElementById('step5');
+        const requiredFields = Array.from(step5.querySelectorAll('[required]'));
+        const invalid = requiredFields.some(input => !input.value.trim());
+        if (invalid) {
+            event.preventDefault();
+            alert('Please fill all required fields in final step before submitting.');
+        }
+    });
+    </script>
+</body>
+</html>

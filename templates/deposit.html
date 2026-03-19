@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deposit | Sky Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='deposit.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="transaction-body">
+    <div class="reg-container">
+        <div class="account-options">
+            <i class="fas fa-arrow-circle-down" style="font-size: 3rem; color: var(--text-sub); margin-bottom: 1rem;"></i>
+            <h2>Deposit Funds</h2>
+            <p style="color: var(--text-sub); margin-bottom: 2rem;">Add money to your Sky Bank vault</p>
+
+            <form action="/deposit" method="POST">
+                <div class="input-group">
+                    <label>Select Destination Account</label>
+                    <select name="account_id" class="form-select" required>
+                        {% for acc in user.accounts %}
+                            <option value="{{ acc.id }}">{{ acc.account_type }} ({{ acc.account_number }})</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Amount to Deposit ($)</label>
+                    <input type="number" name="amount" step="0.01" min="1" placeholder="Enter amount (e.g. 1000)" class="form-input" required>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button type="submit" class="btn-create">Confirm Deposit</button>
+                    <a href="/dashboard" style="display: block; margin-top: 1rem; color: var(--text-sub); text-decoration: none; font-size: 0.9rem;">Cancel and Go Back</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

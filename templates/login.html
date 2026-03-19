@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ "Login" if mode == 'login' else "Register" }} |Money Wise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+</head>
+<body>
+
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <main class="auth-container">
+        <section class="brand-side">
+            <h1>Welcome to MoneyWise</h1>
+            <h2>Start Your Journey</h2>
+            <p>We provide the world's best banking services to our customers. Using secure, powerful servers for safe online banking, we ensure the fastest transactions.</p>
+        
+        </section>
+
+        <section class="form-side">
+            <div class="auth-card">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/30/007bff/ffffff?text=S" alt="Logo" style="border-radius: 4px;"> Sky Bank
+                </div>
+
+                <h3>👋 Sign into your account</h3>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="message-wrap">
+                            {% for category, message in messages %}
+                                <div class="flash flash-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 30px;">Please enter your details.</p>
+
+                <form method="POST">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="Alex123" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" placeholder="••••••••••••" required>
+                    </div>
+
+                    {% if mode == 'register' %}
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input type="password" name="confirm_password" placeholder="••••••••••••" required>
+                    </div>
+                    {% endif %}
+
+                    <button type="submit" class="btn-auth">
+                        {{ "Login" if mode == 'login' else "Login" }}
+                    </button>
+                </form>
+
+                <div class="auth-footer">
+                    {% if mode == 'login' %}
+                        Don't have an account? <a href="/register">Register here</a>
+                    {% else %}
+                        Dont have an account? <a href="/login">Register Here </a>
+                    {% endif %}
+                </div>
+                
+
+                <div class="back-to-home">
+                    <a href="{{ url_for('home') }}">
+                        <i class="fas fa-arrow-left"></i> Back to Homepage
+                     </a>
+                </div>
+
+                <div style="margin-top: 40px; text-align: center;">
+                    <p style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 15px;">Follow us on:</p>
+                    <div style="display: flex; justify-content: center; gap: 20px; color: #64748b;">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-google"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-github"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

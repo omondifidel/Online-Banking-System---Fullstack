@@ -1,0 +1,223 @@
+/* Custom Variables for "Moneywise" Theme */
+:root {
+    --primary-glow: rgba(167, 139, 250, 0.65); /* Stronger purple glow */
+    --accent-btn: #7c3aed; /* Deep purple for the main button */
+    --bg-deep: #05020d; /* darker and cooler */
+    --text-main: #ffffff;
+    --text-sub: #c4b5fd;
+    --glass-nav: rgba(255, 255, 255, 0.05);
+    --border: rgba(167, 139, 250, 0.35);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-deep);
+    background-image:
+        radial-gradient(circle at 80% 25%, rgba(124, 58, 237, 0.25), transparent 36%),
+        radial-gradient(circle at 20% 85%, rgba(167, 139, 250, 0.18), transparent 44%),
+        radial-gradient(circle at 50% 50%, rgba(132, 204, 22, 0.01), transparent 40%);
+    color: var(--text-main);
+    overflow-x: hidden;
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- THE FALLING LINES BACKGROUND --- */
+.lines-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Behind content */
+    pointer-events: none; /* Let clicks pass through */
+}
+
+/* Individual lines - these will span the width */
+.falling-line {
+    position: absolute;
+    top: -100px; /* Start off-screen */
+    height: 140px; /* Longer line for stronger effect */
+    width: 1.8px; /* a bit thicker */
+    background: linear-gradient(to bottom, transparent 8%, rgba(167, 139, 250, 0.75) 45%, rgba(99, 102, 241, 0.85) 55%, transparent 92%);
+    box-shadow: 0 0 18px rgba(167, 139, 250, 0.7), 0 0 28px rgba(99, 102, 241, 0.25);
+    animation: fall linear infinite;
+}
+
+/* Animation: Falling and Fading */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) scaleY(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 0.8;
+        transform: translateY(100vh) scaleY(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(110vh) scaleY(0.1); /* Shrinks and disappears */
+    }
+}
+
+/* --- Navigation --- */
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    background: var(--glass-nav);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--border);
+    border-radius: 50px; /* More rounded like reference */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 2rem;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.logo-icon {
+    width: 24px;
+    height: 24px;
+    background: conic-gradient(from 180deg at 50% 50%, #6366f1, #a855f7);
+    border-radius: 6px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-sub);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+.nav-links a:hover { color: white; }
+
+.right-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.right-nav a {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.25s ease, text-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.right-nav a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.9), 0 0 18px rgba(167, 139, 250, 0.95);
+    transform: translateY(-1px);
+    filter: brightness(1.35);
+}
+
+/* --- Hero Section (Centered Content) --- */
+.hero {
+    flex: 1; /* Fills remaining height */
+    padding: 160px 10% 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2; /* In front of lines */
+}
+
+/* "Join Waitlist" Badge */
+.badge {
+    background: var(--glass-nav);
+    border: 1px solid var(--border);
+    color: var(--text-sub);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2rem;
+}
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-btn);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-btn);
+}
+
+/* The Main Headline */
+.hero-headline {
+    font-size: clamp(3rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: white;
+}
+
+/* Sub-headline Text */
+.hero-subtext {
+    color: var(--text-sub);
+    font-size: 1.15rem;
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+}
+
+/* The Main CTA Button (With subtle glow) */
+.btn-cta {
+    background: linear-gradient(135deg, var(--accent-btn) 0%, #d8b4fe 100%);
+    color: #000; /* Dark text on light button */
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+}
+.btn-cta:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.5); 
+}
+.btn-secondary {
+    background: linear-gradient(135deg, var(--accent-btn) 0%, #d8b4fe 100%);
+    color: #000; /* Dark text on light button */
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+}
+.btn-secondary:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0.5); 
+}

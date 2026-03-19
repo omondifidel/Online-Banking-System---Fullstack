@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moneywise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="lines-container">
+        <div class="falling-line" style="left: 10%; animation-duration: 7s;"></div>
+        <div class="falling-line" style="left: 20%; animation-duration: 9s; animation-delay: 2s;"></div>
+        <div class="falling-line" style="left: 35%; animation-duration: 11s;"></div>
+        <div class="falling-line" style="left: 50%; animation-duration: 6s; animation-delay: 1s;"></div>
+        <div class="falling-line" style="left: 65%; animation-duration: 13s;"></div>
+        <div class="falling-line" style="left: 80%; animation-duration: 8s; animation-delay: 3s;"></div>
+        <div class="falling-line" style="left: 95%; animation-duration: 10s;"></div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                Moneywise
+            </div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="/services">Services</a>
+                <a href="/about">About Us</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <div class="right-nav">
+                <a href="/register" style="color: var(--text-sub); text-decoration: none; font-size: 0.9rem;">register</a>
+                
+            </div>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <div class="badge">
+            <div class="badge-dot"></div>
+            Let's begin the beautiful journey together.
+        </div>
+
+        <h1 class="hero-headline">Make Your Online Banking <br>Wonderful</h1>
+        
+        <p class="hero-subtext">Track income, manage expenses, and get real-time insights to make smarter financial decisions.</p>
+        
+        <div class="btn-group">
+            <a href="/register" class="btn-cta">Get Started</a>
+            <a href="/login" class="btn-secondary">Log In</a>
+        </div>
+    </main>
+
+</body>
+</html>

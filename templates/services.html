@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Moneywise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='services.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar glass-panel">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>Moneywise</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="/services" class="active">Services</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="/register" style="color: var(--text-sub); text-decoration: none; font-size: 0.9rem;">register</a>
+        </div>
+    </nav>
+
+    <main class="services-container">
+        <header class="services-header">
+            <span class="badge">Innovation at your fingertips</span>
+            <h1>Comprehensive <span>Banking</span> Services</h1>
+            <p>Experience the future of finance with our secure, fast, and intelligent banking solutions.</p>
+        </header>
+
+        <section class="services-grid">
+            <div class="service-card glass-panel">
+                <div class="icon-box"><i class="fas fa-wallet"></i></div>
+                <h3>Digital Wallet</h3>
+                <p>Manage multiple currencies and track your spending with real-time analytics.</p>
+            </div>
+
+            <div class="service-card glass-panel">
+                <div class="icon-box"><i class="fas fa-exchange-alt"></i></div>
+                <h3>Instant Transfers</h3>
+                <p>Send money locally or globally within seconds using our encrypted gateway.</p>
+            </div>
+
+            <div class="service-card glass-panel">
+                <div class="icon-box"><i class="fas fa-shield-alt"></i></div>
+                <h3>Advanced Security</h3>
+                <p>Multi-factor authentication and biometric locks to keep your assets safe.</p>
+            </div>
+
+            <div class="service-card glass-panel">
+                <div class="icon-box"><i class="fas fa-chart-line"></i></div>
+                <h3>Investment Tools</h3>
+                <p>Grow your wealth with automated insights and diversified portfolio management.</p>
+            </div>
+        </section>
+
+        <footer class="services-cta">
+            <a href="/register" class="btn btn-primary">Get Started Now</a>
+        </footer>
+    </main>
+</body>
+</html>

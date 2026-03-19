@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Withdraw | Sky Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='withdrawal.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="transaction-body">
+    <div class="deposit-card">
+        <i class="fas fa-hand-holding-usd"></i>
+        <h2>Withdraw Funds</h2>
+        <p>Securely debit funds from your Sky Bank vault.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }}" 
+                   style="padding: 12px; margin-bottom: 20px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.9rem;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/withdraw" method="POST">
+            <div class="input-group">
+                <label>Source Account</label>
+                <select name="account_id" class="form-select" required>
+                    {% for acc in user.accounts %}
+                        <option value="{{ acc.id }}">
+                            {{ acc.account_type }} (Balance: ${{ "{:,.2f}".format(acc.balance) }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Withdrawal Amount ($)</label>
+                <input type="number" name="amount" step="0.01" min="1" placeholder="0.00" class="form-input" required>
+            </div>
+
+            <button type="submit" class="btn-deposit" style="background: linear-gradient(135deg, #ef4444 0%, #7c3aed 100%);">
+                Confirm Withdrawal
+            </button>
+            <a href="/dashboard" class="cancel-link">Return to Dashboard</a>
+        </form>
+    </div>
+</body>
+</html>

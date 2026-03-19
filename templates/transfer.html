@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer | Sky Bank</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='transfer.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="transaction-body">
+    <div class="deposit-card">
+        <i class="fas fa-exchange-alt"></i>
+        <h2>Internal Transfer</h2>
+        <p>Move funds instantly between Sky Bank accounts.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }}" 
+                   style="padding: 12px; margin-bottom: 20px; border-radius: 10px; background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--glass-border); font-size: 0.85rem;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form action="/transfer" method="POST">
+            <div class="input-group">
+                <label>From Your Account</label>
+                <select name="sender_account_id" class="form-select" required>
+                    {% for acc in user.accounts %}
+                        <option value="{{ acc.id }}">{{ acc.account_type }} ($ {{ "{:,.2f}".format(acc.balance) }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Recipient Account Number</label>
+                <div style="position: relative;">
+                    <input type="text" name="recipient_acc_no" placeholder="SKY-0000000000" class="form-input" style="padding-left: 45px;" required>
+                    <i class="fas fa-user-tag" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 1rem; color: var(--text-sub);"></i>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Amount to Transfer ($)</label>
+                <input type="number" name="amount" step="0.01" min="1" placeholder="0.00" class="form-input" required>
+            </div>
+
+            <button type="submit" class="btn-deposit" style="background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 100%);">
+                Send Funds Now
+            </button>
+            <a href="/dashboard" class="cancel-link">Return to Dashboard</a>
+        </form>
+    </div>
+</body>
+</html>

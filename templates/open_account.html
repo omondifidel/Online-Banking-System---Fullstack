@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Open Account | Moneywise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='open_account.css') }}" />
+</head>
+<body>
+    <div class="lines-container">
+        <div class="falling-line" style="left: 10%; animation-duration: 7s;"></div>
+        <div class="falling-line" style="left: 20%; animation-duration: 9s; animation-delay: 2s;"></div>
+        <div class="falling-line" style="left: 35%; animation-duration: 11s;"></div>
+        <div class="falling-line" style="left: 50%; animation-duration: 6s; animation-delay: 1s;"></div>
+        <div class="falling-line" style="left: 65%; animation-duration: 13s;"></div>
+        <div class="falling-line" style="left: 80%; animation-duration: 8s; animation-delay: 3s;"></div>
+        <div class="falling-line" style="left: 95%; animation-duration: 10s;"></div>
+    </div>
+
+    <div class="reg-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }}" 
+                   style="padding: 10px; margin-bottom: 20px; border-radius: 5px; 
+                          background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="account-options">
+            <h2>Choose Your Account Type</h2>
+            <form action="/open-account" method="POST">
+                <select name="account_type" class="form-select">
+                    <option value="Savings">Savings Account (4% Interest)</option>
+                    <option value="Salary">Salary Account (Zero Balance)</option>
+                    <option value="Fixed">Fixed Deposit (7% Interest)</option>
+                </select>
+                <button type="submit" class="btn-create">Open Account Now</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
