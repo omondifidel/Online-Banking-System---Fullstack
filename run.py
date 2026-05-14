@@ -1,16 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from models import db, User, Account, Transaction
 import random
+import os
 
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = 'dev_key_for_sky_bank_2026'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev_key_for_sky_bank_2026')
 
 # --- CONNECTION CODE STARTS HERE ---
-# Format: postgresql://username:password@localhost:5432/database_name
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:dev_key_for_sky_bank_2026@db.qtqrvycccsfrmgaycmsh.supabase.co:5432/postgres'
+os.getenv('DATABASE_URL')
+database_url = os.getenv('DATABASE_URL')
+if database_url and database_url.startswith("postgres://"):
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'postgresql://postgres:dev_key_for_sky_bank_2026@localhost:5432/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 db.init_app(app)
 
