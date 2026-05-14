@@ -1,3 +1,5 @@
+<img width="1365" height="678" alt="success" src="https://github.com/user-attachments/assets/71858632-14ed-4e22-84a6-fef2eb7c2405" />
+<img width="1365" height="678" alt="success" src="https://github.com/user-attachments/assets/fff61e41-616d-4a72-8565-cdd9f55276fd" />
 Updating your **README.md** is the final touch of a professional. When recruiters from **Betika** or **Nathan & Nathan** look at your GitHub, they shouldn't just see code; they should see a **documented engineering process**.
 
 Let’s use the **Diátaxis framework** (Tutorial, Guide, Reference, Explanation) to make this standout.
