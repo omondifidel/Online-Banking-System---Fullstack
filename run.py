@@ -21,7 +21,7 @@ db.init_app(app)
 
 # --- CONNECTION CODE ENDS HERE ---
 
-@app.route('/Home')
+@app.route('/')
 def home():
     return render_template('home.html')
 
