@@ -109,4 +109,4 @@ python run.py
 2. **Add a "Screenshots" section:** Drag and drop **image_af381d.png** (the working UI) right under the Project Overview.
 3. **The requirements.txt:** Make sure `psycopg2-binary` and `python-dotenv` are listed there so the next person (or Vercel) can install it perfectly.
 
-**How does this look for your profile? It definitely tells a much bigger story than just "a banking app."**
+
