@@ -1,13 +1,4 @@
 
-
-Updating your **README.md** is the final touch of a professional. When recruiters from **Betika** or **Nathan & Nathan** look at your GitHub, they shouldn't just see code; they should see a **documented engineering process**.
-
-Let’s use the **Diátaxis framework** (Tutorial, Guide, Reference, Explanation) to make this standout.
-
----
-
-### **SkyBank Core - README.md Draft**
-
 # 🏦 SkyBank: Full-Stack Banking System
 
 **A high-integrity financial application focused on secure transaction logic and cloud-native deployment.**
