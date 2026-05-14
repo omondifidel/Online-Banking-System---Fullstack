@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = 'dev_key_for_sky_bank_2026'
 
 # --- CONNECTION CODE STARTS HERE ---
 # Format: postgresql://username:password@localhost:5432/database_name
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Postsmf12#@localhost:5432/banking_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:dev_key_for_sky_bank_2026@localhost:5432/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
