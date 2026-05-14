@@ -111,7 +111,8 @@ python run.py
 2. **Add a "Screenshots" section:** Drag and drop **image_af381d.png** (the working UI) right under the Project Overview.
 3. **The requirements.txt:** Make sure `psycopg2-binary` and `python-dotenv` are listed there so the next person (or Vercel) can install it perfectly.
 
+SCREENSHOTS
+<img width="1365" height="643" alt="Home" src="https://github.com/user-attachments/assets/e1aa4ce4-2fe0-4c26-b0f8-c4a66845ff46" />
 <img width="1365" height="637" alt="About us " src="https://github.com/user-attachments/assets/608204fb-bc49-4157-9fe1-d6d5b50fdf7b" />
 <img width="1365" height="644" alt="Services" src="https://github.com/user-attachments/assets/a2773aa8-d218-488d-ad72-b995b817197f" />
-<img width="1365" height="643" alt="Home" src="https://github.com/user-attachments/assets/e1aa4ce4-2fe0-4c26-b0f8-c4a66845ff46" />
 <img width="1365" height="679" alt="contact" src="https://github.com/user-attachments/assets/ac693fed-b1d5-47b4-9fd9-27663acef576" />
