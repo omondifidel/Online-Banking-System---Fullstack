@@ -19,9 +19,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
-# This line creates the tables in Postgres automatically if they don't exist
-with app.app_context():
-    db.create_all()
 # --- CONNECTION CODE ENDS HERE ---
 
 @app.route('/Home')
